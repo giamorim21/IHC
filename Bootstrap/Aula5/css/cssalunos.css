@@ -7,4 +7,20 @@ body {
     padding-top: 8rem;
   }
 
+input[type="checkbox"] {
+  border: 2px solid var(--verde-claro);
+  box-shadow: none;
+}
 
+input[type="checkbox"]:checked, 
+input[type="checkbox"]:focus {
+  background-color: var(--verde-claro);
+  border-color: var(--verde-claro);
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-padrao{
+  background-color: var(--verde-claro);
+  color: rgb(255, 255, 255, 1.0);
+}
