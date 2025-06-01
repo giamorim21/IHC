@@ -1,0 +1,102 @@
+:root {
+  --cor-fundo-imagem: url('../img/imagem.png'); 
+  --cor-overlay: rgba(0, 0, 0, 0.5);
+  --cor-caixa: rgba(226, 180, 142, 0.95); 
+  --cor-home: rgba(226, 180, 142);
+  --cor-titulo: #8B4513;
+  --sombra-caixa: rgba(0, 0, 0, 0.3);
+  --cor-botao: #8B4513; 
+  --cor-botao-hover: #A0522D;
+  --cor-botao-sombra-foco: #8B451380; 
+  --cor-input-fundo: #f0e6d2;
+  --cor-input-texto: #333;
+  --cor-input-borda: #ccc;
+}
+/*
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo-imagem) center/cover no-repeat;
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--sombra-caixa);
+}
+
+.login-title {
+  color: var(--cor-titulo);
+  font-weight: bold; 
+  margin-bottom: 1rem;
+}
+
+.input-personalizado {
+  background-color: var(--cor-caixa);
+  color: var(--cor-input-texto);
+  border: 1px solid var(--cor-caixa);
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.input-personalizado:focus {
+  border-color: var(--cor-botao);
+  box-shadow: 0 0 5px var(--cor-botao-sombra-foco); 
+  outline: none;
+}*/
+
+body{
+  height: 100px;
+  padding-top: 3rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2em; /* Ajuste este valor conforme necessário */
+}
+
+/* Centralizar verticalmente o título com a imagem na navbar */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 0.5em; /* Ajuste o espaçamento entre a logo e o texto, se necessário */
+}
+
+.personagem-imagem {
+    height: 500px; 
+    object-fit: cover;
+}
+
+.carousel-imagem {
+    height: 600px; 
+    object-fit: cover;
+}
+
+
+.btn-personalizado {
+    background-color: var(--cor-home);
+    border-color: var(--cor-caixa);
+}
+
+.btn-personalizado:hover {
+    background-color: var(--cor-caixa);
+    border-color: var(--cor-home);
+}
+
+
+.accordion-item .accordion-header button.accordion-button:not(.collapsed) {
+    background-color: var(--cor-caixa); 
+    color: var(--cor-titulo); 
+}
+
+.accordion-item .accordion-header button.accordion-button:focus {
+    border-color: var(--cor-botao); 
+    box-shadow: 0 0 0 0.25rem var(--cor-botao-sombra-foco); 
+}
