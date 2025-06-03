@@ -1,0 +1,28 @@
+:root {
+  --cor-fundo-imagem: url('../img/imagem.png');
+  --cor-caixa: rgba(226, 180, 142, 0.95);
+  --cor-titulo: #8B4513;
+  --sombra-caixa: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background-image: var(--cor-fundo-imagem);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-title {
+  color: var(--cor-titulo);
+}
+
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--cor-caixa);
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--sombra-caixa);
+}
+
+
