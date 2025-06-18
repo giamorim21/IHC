@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Adicionando o bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+    <!-- Adicionando biblioteca React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Transpiler BABEL-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+<body class="bg-light">
+    <!-- Inicio -->
+
+    <div class="container py-5">
+        <div id="root"></div>
+    </div>
+
+    <!-- Incluindo React e ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Incluindo Babel para transpilagem JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Código React
+        const { useState } = React; // Desestruturação do useState do objeto React
+
+        // Componente funcional App
+        function App() {
+            // Estado para armazenar a lista de tarefas
+            const [tasks, setTasks] = useState([
+                { id: 1, text: 'Aula de React' },
+                { id: 2, text: 'Construir um projeto com Bootstrap' }, // Correção: Bootsrap -> Bootstrap
+                { id: 3, text: 'Praticar mais' }
+            ]);
+
+            // Estado para armazenar o valor do input do formulário
+            const [inputValue, setInputValue] = useState('');
+            // Estado para controlar a visibilidade do modal de aviso
+            const [showModal, setShowModal] = useState(false);
+            // Estado para armazenar a mensagem do modal
+            const [modalMessage, setModalMessage] = useState('');
+
+            // Função para exibir o modal
+            const displayModal = (message) => {
+                setModalMessage(message);
+                setShowModal(true);
+            };
+
+            // Função para fechar o modal
+            const closeModal = () => {
+                setShowModal(false);
+                setModalMessage('');
+            };
+
+            // Manipulador de evento para adicionar uma nova tarefa
+            const handleAddTask = (e) => {
+                e.preventDefault(); // Correção: preventdefault() -> preventDefault() - Corrigido erro de digitação
+                if (inputValue.trim() === '') {
+                    displayModal("Por favor, digite uma tarefa."); // Substituído alert() por modal personalizado
+                    return;
+                }
+
+                // Cria um novo objeto de tarefa com um ID único e o texto do input
+                const newTask = {
+                    id: Date.now(), // Gera um ID único baseado no timestamp atual
+                    text: inputValue
+                };
+
+                // Adiciona a nova tarefa à lista de tarefas existente
+                setTasks([...tasks, newTask]);
+                // Limpa o input após adicionar a tarefa
+                setInputValue('');
+            };
+
+            // Manipulador de evento para remover uma tarefa
+            const handleRemoveTask = (idToRemove) => {
+                // Filtra a lista de tarefas, removendo a tarefa com o ID correspondente
+                const updatedTasks = tasks.filter(task => task.id !== idToRemove); // Correção: updatedtasks -> updatedTasks (convenção de camelCase)
+                setTasks(updatedTasks); // Atualiza o estado das tarefas
+            };
+
+            // Renderiza o componente principal da aplicação
+            return (
+                <div className="container py-5">
+                    <div className="row justify-content-center">
+                        <div className="col-lg-8"> {/* Aumentado para col-lg-8 para melhor visualização */}
+                            <div className="card shadow-sm">
+                                <div className="card-body p-4">
+                                    <h1 className="card-title text-center h2 mb-4">
+                                        Lista de Tarefas
+                                    </h1>
+
+                                    {/* Formulário para adicionar novas tarefas */}
+                                    <form onSubmit={handleAddTask} className="mb-4">
+                                        <div className="input-group">
+                                            <input
+                                                type="text"
+                                                value={inputValue}
+                                                onChange={(e) => setInputValue(e.target.value)}
+                                                placeholder="Adicionar nova tarefa..."
+                                                className="form-control form-control-lg"
+                                            />
+                                            <button type="submit" className="btn btn-primary">
+                                                Adicionar
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    {/* Lista de tarefas */}
+                                    <ul className="list-group">
+                                        {/* Renderiza as tarefas se houver alguma, caso contrário, exibe uma mensagem */}
+                                        {tasks.length > 0 ? (
+                                            tasks.map(task => (
+                                                <TodoItem
+                                                    key={task.id} // Chave única para cada item da lista (necessário para o React)
+                                                    task={task}
+                                                    onRemove={handleRemoveTask} // Correção: handleRemoteTask -> handleRemoveTask - Corrigido erro de digitação
+                                                />
+                                            ))
+                                        ) : (
+                                            <p className="text-center text-muted">Nenhuma tarefa na lista. Adicione uma!</p> // Correção: Aducuibe -> Adicione - Corrigido erro de digitação
+                                        )}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Modal personalizado para avisos */}
+                    {showModal && (
+                        <div className="custom-modal d-flex">
+                            <div className="custom-modal-content">
+                                <p>{modalMessage}</p>
+                                <button onClick={closeModal}>OK</button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Componente funcional TodoItem para cada item da tarefa
+        function TodoItem({ task, onRemove }) {
+            return (
+                <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{task.text}</span>
+                    <button
+                        onClick={() => onRemove(task.id)} // Chama a função onRemove passada via props
+                        className="btn btn-sm btn-outline-danger"
+                        title="Remover tarefa"
+                    >
+                        &times; {/* Caractere 'X' para o botão de remover */}
+                    </button>
+                </li>
+            );
+        }
+
+        // Obtém o elemento DOM onde a aplicação React será montada
+        const container = document.getElementById('root'); // Correção: documnet -> document - Corrigido erro de digitação
+        // Cria a raiz do React para renderizar a aplicação
+        const root = ReactDOM.createRoot(container); // Correção: reactDom -> ReactDOM - Corrigido erro de digitação
+        // Renderiza o componente App na raiz
+        root.render(<App />);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
